@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeopen.system.mapper.ProjectMapper">
+    
+    <resultMap type="Project" id="ProjectResult">
+        <result property="id"    column="id"    />
+        <result property="projectClass"    column="project_class"    />
+        <result property="projectCode"    column="project_code"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="enName"    column="en_name"    />
+        <result property="projectSpec"    column="project_spec"    />
+        <result property="projectCaption"    column="project_caption"    />
+        <result property="projectPrice"    column="project_price"    />
+        <result property="status"    column="status"    />
+        <result property="consumableCodes"    column="consumable_codes"    />
+        <result property="consumableNames"    column="consumable_names"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="createdData"    column="created_data"    />
+        <result property="updatedBy"    column="updated_by"    />
+        <result property="updatedData"    column="updated_data"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+	
+	<sql id="selectProjectVo">
+        select id, project_class, project_code, project_name, en_name, project_spec, project_caption, project_price, status, consumable_codes, consumable_names, created_by, created_data, updated_by, updated_data, remarks, del_flag from laboratory_project
+    </sql>
+	
+    <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
+        <include refid="selectProjectVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="projectClass != null  and projectClass != '' "> and project_class = #{projectClass}</if>
+             <if test="projectCode != null  and projectCode != '' "> and project_code = #{projectCode}</if>
+             <if test="projectName != null  and projectName != '' "> and project_name = #{projectName}</if>
+             <if test="enName != null  and enName != '' "> and en_name = #{enName}</if>
+             <if test="projectSpec != null  and projectSpec != '' "> and project_spec = #{projectSpec}</if>
+             <if test="projectCaption != null  and projectCaption != '' "> and project_caption = #{projectCaption}</if>
+             <if test="projectPrice != null "> and project_price = #{projectPrice}</if>
+             <if test="status != null  and status != '' "> and status = #{status}</if>
+             <if test="consumableCodes != null  and consumableCodes != '' "> and consumable_codes = #{consumableCodes}</if>
+             <if test="consumableNames != null  and consumableNames != '' "> and consumable_names = #{consumableNames}</if>
+             <if test="createdBy != null "> and created_by = #{createdBy}</if>
+             <if test="createdData != null "> and created_data = #{createdData}</if>
+             <if test="updatedBy != null "> and updated_by = #{updatedBy}</if>
+             <if test="updatedData != null "> and updated_data = #{updatedData}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="delFlag != null  and delFlag != '' "> and del_flag = #{delFlag}</if>
+         </where>
+    </select>
+    
+    <select id="selectProjectById" parameterType="Long" resultMap="ProjectResult">
+        <include refid="selectProjectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProject" parameterType="Project">
+        insert into laboratory_project
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="projectClass != null  and projectClass != ''  ">project_class,</if>
+			<if test="projectCode != null  and projectCode != ''  ">project_code,</if>
+			<if test="projectName != null  and projectName != ''  ">project_name,</if>
+			<if test="enName != null  and enName != ''  ">en_name,</if>
+			<if test="projectSpec != null  and projectSpec != ''  ">project_spec,</if>
+			<if test="projectCaption != null  and projectCaption != ''  ">project_caption,</if>
+			<if test="projectPrice != null  ">project_price,</if>
+			<if test="status != null  and status != ''  ">status,</if>
+			<if test="consumableCodes != null  and consumableCodes != ''  ">consumable_codes,</if>
+			<if test="consumableNames != null  and consumableNames != ''  ">consumable_names,</if>
+			<if test="createdBy != null  ">created_by,</if>
+			<if test="createdData != null  ">created_data,</if>
+			<if test="updatedBy != null  ">updated_by,</if>
+			<if test="updatedData != null  ">updated_data,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="delFlag != null  and delFlag != ''  ">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="projectClass != null  and projectClass != ''  ">#{projectClass},</if>
+			<if test="projectCode != null  and projectCode != ''  ">#{projectCode},</if>
+			<if test="projectName != null  and projectName != ''  ">#{projectName},</if>
+			<if test="enName != null  and enName != ''  ">#{enName},</if>
+			<if test="projectSpec != null  and projectSpec != ''  ">#{projectSpec},</if>
+			<if test="projectCaption != null  and projectCaption != ''  ">#{projectCaption},</if>
+			<if test="projectPrice != null  ">#{projectPrice},</if>
+			<if test="status != null  and status != ''  ">#{status},</if>
+			<if test="consumableCodes != null  and consumableCodes != ''  ">#{consumableCodes},</if>
+			<if test="consumableNames != null  and consumableNames != ''  ">#{consumableNames},</if>
+			<if test="createdBy != null  ">#{createdBy},</if>
+			<if test="createdData != null  ">#{createdData},</if>
+			<if test="updatedBy != null  ">#{updatedBy},</if>
+			<if test="updatedData != null  ">#{updatedData},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="delFlag != null  and delFlag != ''  ">#{delFlag},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateProject" parameterType="Project">
+        update laboratory_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectClass != null  and projectClass != ''  ">project_class = #{projectClass},</if>
+            <if test="projectCode != null  and projectCode != ''  ">project_code = #{projectCode},</if>
+            <if test="projectName != null  and projectName != ''  ">project_name = #{projectName},</if>
+            <if test="enName != null  and enName != ''  ">en_name = #{enName},</if>
+            <if test="projectSpec != null  and projectSpec != ''  ">project_spec = #{projectSpec},</if>
+            <if test="projectCaption != null  and projectCaption != ''  ">project_caption = #{projectCaption},</if>
+            <if test="projectPrice != null  ">project_price = #{projectPrice},</if>
+            <if test="status != null  and status != ''  ">status = #{status},</if>
+            <if test="consumableCodes != null  and consumableCodes != ''  ">consumable_codes = #{consumableCodes},</if>
+            <if test="consumableNames != null  and consumableNames != ''  ">consumable_names = #{consumableNames},</if>
+            <if test="createdBy != null  ">created_by = #{createdBy},</if>
+            <if test="createdData != null  ">created_data = #{createdData},</if>
+            <if test="updatedBy != null  ">updated_by = #{updatedBy},</if>
+            <if test="updatedData != null  ">updated_data = #{updatedData},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteProjectById" parameterType="Long">
+        delete from laboratory_project where id = #{id}
+    </delete>
+	
+    <delete id="deleteProjectByIds" parameterType="String">
+        delete from laboratory_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
